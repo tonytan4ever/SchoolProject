@@ -1,0 +1,4 @@
+SchoolProject
+=============
+
+Our schoo project
