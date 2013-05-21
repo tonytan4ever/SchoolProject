@@ -1,4 +1,4 @@
 SchoolProject
 =============
 
-Our schoo project
+Random stuff project
