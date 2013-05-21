@@ -1,0 +1,52 @@
+<!doctype html>
+<head>
+<title>{{ config['name'] }}</title>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='js/dojo/dijit/themes/claro/claro.css') }}">	
+<script>dojoConfig = {parseOnLoad: true}</script>
+<script src='{{ url_for('static', filename='js/dojo/dojo/dojo.js') }}'></script>
+<script>
+require([
+         "dijit/layout/BorderContainer",
+         "dijit/layout/ContentPane",
+         "dijit/layout/TabContainer",
+         "dojo/domReady!"
+     ], function(BorderContainer, ContentPane, TabContainer){
+         // create a BorderContainer as the top widget in the hierarchy
+         var bc = new BorderContainer({style: "height: 100%; width: 100%;"});
+
+         // create a ContentPane as the left pane in the BorderContainer
+         var cp1 = new ContentPane({
+             region: "top",
+             style: "height: 10%",
+             content: "<a>login<a/>      <a>logout</a>     <a>sign up</a>"
+         });
+         bc.addChild(cp1);
+
+         // create a TabContainer as the center pane in the BorderContainer,
+         // which itself contains two children
+         var tc = new TabContainer({region: "center"});
+         var tab1 = new ContentPane({title: "Home",
+        	               content: "Home content"
+         }),
+         tab2 = new ContentPane({title: "Get Tutoring",
+                           content: "All Posts"
+         }),
+         tab3 = new ContentPane({title: "Get Paid",
+                   		  content: "Getting paid here"
+         });
+         tc.addChild( tab1 );
+         tc.addChild( tab2 );
+         tc.addChild( tab3 );
+         bc.addChild(tc);
+
+         // put the top level widget into the document, and then call startup()
+         document.body.appendChild(bc.domNode);
+         bc.startup();
+     });
+</script>
+</head>
+
+<body class="claro">
+
+</body>
