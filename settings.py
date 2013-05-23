@@ -14,5 +14,6 @@ class ProdConfig(Config):
 
 class DevConfig(Config):
     DEBUG = True
+    ASSETS_DEBUG=True
     SQLALCHEMY_DATABASE_URI = 'sqlite://example.db'
     SQLALCHEMY_ECHO = True
