@@ -12,6 +12,10 @@ common_dojo_js = Bundle(
     'js/dojo/dojo/dojo.js',
     output='js/dojo/dojo/dojo_compressed.js')
 
+common_ui_control_js = Bundle(
+    'public/js/ui/login_form.js',                         
+    output='public/js/ui_controls.js')
+
 common_bootstrap_js = Bundle(
     'vendor/bootstrap/js/dojo_config.js',                         
     'vendor/bootstrap/js/bootstrap.main.js',
