@@ -8,9 +8,6 @@ common_css = Bundle(
     ),
     output='public/css/common.css')
 
-common_dojo_js = Bundle(
-    'js/dojo/dojo/dojo.js',
-    output='js/dojo/dojo/dojo_compressed.js')
 
 common_ui_control_js = Bundle(
     'public/js/ui/login_form.js',                         
