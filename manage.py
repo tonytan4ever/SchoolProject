@@ -1,10 +1,12 @@
-#!/usr/bin/env python
-from flask.ext.script import Manager, Shell, Server
-from flask_assets import ManageAssets
-from control import app,assets_env
+from flask.ext.assets import ManageAssets
+from flask.ext.script import Manager
+from flask.ext.security.script import CreateUserCommand
 
-manager = Manager(app)
-manager.add_command("assets", ManageAssets(assets_env))
-manager.add_command("runserver", Server(host="10.0.2.15", port=8000))
-manager.add_command("shell", Shell())
-manager.run()
+from app import create_app
+
+manager = Manager(create_app())
+manager.add_command("assets", ManageAssets())
+manager.add_command('create_user', CreateUserCommand())
+
+if __name__ == "__main__":
+    manager.run()
