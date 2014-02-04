@@ -2,18 +2,31 @@
 from flask import redirect, url_for, session
 from flask.ext.assets import Environment
 from flask.ext.security import Security, SQLAlchemyUserDatastore
-from flask.ext.social import Social, SQLAlchemyConnectionDatastore, \
-     login_failed
-from flask.ext.social.utils import get_conection_values_from_oauth_response
 from flask.ext.sqlalchemy import SQLAlchemy
+
+from flask import redirect, url_for, session
+from flask.ext.assets import Environment
+from flask.ext.security import Security, SQLAlchemyUserDatastore
+from flask.ext.sqlalchemy import SQLAlchemy
+
+from .social_framework import Social, SQLAlchemyConnectionDatastore, \
+     login_failed
+from .social_framework import utils
 
 from .helpers import Flask
 from .middleware import MethodRewriteMiddleware
 
+import os
+
+PROJECT_OATH = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
 app = Flask(__name__)
 app.config.from_yaml(app.root_path)
 app.config.from_heroku()
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + PROJECT_OATH + '/db.sqlite'
+app.config['DEBUG'] = True
+
 app.wsgi_app = MethodRewriteMiddleware(app.wsgi_app)
 
 db = SQLAlchemy(app)
@@ -65,3 +78,4 @@ def on_login_failed(sender, provider, oauth_response):
 def social_login_error(error):
     return redirect(
         url_for('register', provider_id=error.provider.id, login_failed=1))
+
