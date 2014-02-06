@@ -1,9 +1,26 @@
+# -*- coding: utf-8 -*-
 
-import os
+import sys, os, pwd
 
-from app import app
+project = "After School Heaven"
+
+# Use instance folder, instead of env variables.
+# specify dev/production config
+#os.environ['%s_APP_CONFIG' % project.upper()] = ''
+# http://code.google.com/p/modwsgi/wiki/ApplicationIssues#User_HOME_Environment_Variable
+#os.environ['HOME'] = pwd.getpwuid(os.getuid()).pw_dir
+
+BASE_DIR = os.path.join(os.path.dirname(__file__))
+# activate virtualenv
+#activate_this = os.path.join(BASE_DIR, "env/bin/activate_this.py")
+#execfile(activate_this, dict(__file__=activate_this))
+
+if BASE_DIR not in sys.path:
+    sys.path.append(BASE_DIR)
+
+# give wsgi the "application"
+from framework import create_app
+application = create_app()
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host="10.0.2.15", 
-               port=port)
+    application.run()

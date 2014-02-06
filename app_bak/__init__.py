@@ -27,8 +27,15 @@ app.config.from_heroku()
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + PROJECT_OATH + '/db.sqlite'
 app.config['DEBUG'] = True
 
+
+app.config['SOCIAL_FACEBOOK'] = {
+    'consumer_key': '527132627401839',
+    'consumer_secret': '21174e6e7c44880e7eb360ce52888ca6'
+}
+
 app.wsgi_app = MethodRewriteMiddleware(app.wsgi_app)
 
+app.config['SECURITY_POST_LOGIN'] = '/profile'
 db = SQLAlchemy(app)
 webassets = Environment(app)
 
@@ -63,13 +70,13 @@ def template_extras():
 
 @login_failed.connect_via(app)
 def on_login_failed(sender, provider, oauth_response):
-    app.logger.debug('Social Login Failed via %s; '
+    print ('Social Login Failed via %s; '
                      '&oauth_response=%s' % (provider.name, oauth_response))
 
     # Save the oauth response in the session so we can make the connection
     # later after the user possibly registers
     session['failed_login_connection'] = \
-        get_conection_values_from_oauth_response(provider, oauth_response)
+        utils.get_conection_values_from_oauth_response(provider, oauth_response)
 
     raise SocialLoginError(provider)
 

@@ -17,7 +17,7 @@ config = {
     'id': 'facebook',
     'name': 'Facebook',
     'install': 'pip install facebook-sdk',
-    'module': 'flask_social.providers.facebook',
+    'module': 'app.social_framework.providers.facebook',
     'base_url': 'https://graph.facebook.com/',
     'request_token_url': None,
     'access_token_url': '/oauth/access_token',
@@ -29,7 +29,7 @@ config = {
 
 
 def get_api(connection, **kwargs):
-    return facebook.GraphAPI(getattr(connection, 'access_token'))
+    return facebook.GraphAPI(getattr(connection, 'accespip install http://github.com/pythonforfacebook/facebook-sdk/tarball/masters_token'))
 
 
 def get_provider_user_id(response, **kwargs):
