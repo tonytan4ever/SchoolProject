@@ -181,6 +181,8 @@ def login_handler(response, provider, query):
     #next = get_url(_security.login_manager.login_view)
     next = url_for('user.register', provider_id=provider.id, login_failed=1)
     msg = '%s account not associated with an existing user' % provider.name
+    #if session['login_attempt']:
+    #    session['failed_login_connection'] = dict(dummy="dummy")
     do_flash(msg, 'danger' if session['login_attempt'] else 'info')
     return redirect(next)
 

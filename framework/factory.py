@@ -51,7 +51,8 @@ def create_app(package_name, package_path, settings_override=None,
 
     register_blueprints(app, INSTALLED_APPS)
     
-    app.wsgi_app = HTTPMethodOverrideMiddleware(app.wsgi_app)
+    app.wsgi_app = HTTPMethodOverrideMiddleware(app.wsgi_app, 
+                                      querystring_param="__METHOD_OVERRIDE__")
     
     
     return app

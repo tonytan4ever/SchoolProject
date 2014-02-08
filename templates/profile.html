@@ -10,8 +10,8 @@
       {% if show_update_form %}
         <form action="{{ url_for('user.social_post', provider_id=provider_id) }}" method="POST" class="post-update">
           <fieldset>
-            <div class="control-group">
-              <textarea class="input-xlarge" name="message" rows="3">Hello from Flask-Social-Example!</textarea>
+            <div class="form-group">
+              <textarea class="form-control input-xlarge" name="message" rows="3">Hello from Flask-Social-Example!</textarea>
             </div>
             <button type="submit" class="btn btn-primary btn-large"><i class="icon-share icon-white"></i> Post Update</button>
           </fieldset>

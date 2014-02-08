@@ -3,12 +3,15 @@ from flask import Blueprint, current_app, render_template,request, flash,\
 
 from flask.ext.security import LoginForm, current_user, login_required, \
     login_user, logout_user
+    
+from flask.ext.security.decorators import anonymous_user_required
+from flask.ext.security.utils import get_post_login_redirect, encrypt_password
 
 from social.utils import config_value, get_provider_or_404
 from social.views import connect_handler
 from forms import RegisterForm
 
-from ..core import security
+#from ..core import security, social
 
 from ..decorators import route
 from .models import User
@@ -21,14 +24,23 @@ def index():
     return redirect('/')
 
 
-@bp.route('/login')
+@bp.route('/login', methods=['GET', 'POST'])
+@anonymous_user_required
 def login():
     if current_user.is_authenticated():
         return redirect(request.referrer or '/')
+    
+    form = LoginForm()
+
+    if form.validate_on_submit():
+        login_user(form.user, remember=form.remember.data)
+        return redirect(get_post_login_redirect())
+
+        
 
     return render_template('security/login.html', 
                                 active_nav_band = "Login",
-                                form=LoginForm())
+                                form=form)
     
 @route(bp, '/logout')
 def logout():
@@ -43,6 +55,7 @@ def logout():
 
 @bp.route('/register', methods=['GET', 'POST'])
 @bp.route('/register/<provider_id>', methods=['GET', 'POST'])
+@anonymous_user_required
 def register(provider_id=None):
     if current_user.is_authenticated():
         return redirect(request.referrer or '/')
@@ -58,7 +71,8 @@ def register(provider_id=None):
 
     if form.validate_on_submit():
         ds = current_app.extensions['security'].datastore
-        user = ds.create_user(email=form.email.data, password=form.password.data)
+        user = ds.create_user(email=form.email.data, 
+                                  password=encrypt_password(form.password.data))
         ds.commit()
 
         # See if there was an attempted social login prior to registering

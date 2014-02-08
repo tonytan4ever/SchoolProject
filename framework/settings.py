@@ -103,7 +103,7 @@ class DefaultConfig(BaseConfig):
     make_dir(OPENID_FS_STORE_PATH)
     
     #SECURITY_LOGIN_USER_TEMPLATE = 'security/login.html'
-    SECURITY_USER_IDENTITY_ATTRIBUTES = ['email', 'username']
+    SECURITY_USER_IDENTITY_ATTRIBUTES = ['email']
     SECURITY_PASSWORD_HASH = 'pbkdf2_sha512'
     SECURITY_PASSWORD_SALT = '4f1WQbWEKMPv9S7p'
     SECURITY_RECOVERABLE = True
