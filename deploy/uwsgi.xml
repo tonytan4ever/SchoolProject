@@ -1,10 +1,10 @@
 <uwsgi id="audit_star">
-    <socket>/tmp/audit_star.sock</socket>
+    <socket>/tmp/after_school_heaven.sock</socket>
     <master/>
-    <chdir>/srv/auditstar_webapp</chdir>
+    <chdir>/srv/after_school_heaven</chdir>
     <module>wsgi</module>
-    <pidfile>/tmp/audit_star.pid</pidfile>
-    <daemonize>/var/log/uwsgi/audit_star.log</daemonize>
+    <pidfile>/tmp/after_school_heaven.pid</pidfile>
+    <daemonize>/var/log/uwsgi/after_school_heaven.log</daemonize>
     <processes>4</processes>
     <harakiri>60</harakiri>
     <reload-mercy>8</reload-mercy>
