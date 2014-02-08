@@ -1,5 +1,7 @@
 {% extends '/layouts/boilerplate.html' %}
 
+{% set page_title = "Profile" %}
+
 {% block body_class %}main main-profile{% endblock %}
 
 {% macro show_provider_button(provider_id, display_name, conn, show_update_form=True) %}
