@@ -10,7 +10,7 @@ class UniqueUser(object):
         self.message = message
 
     def __call__(self, form, field):
-        if current_app.security.datastore.find_user(email=field.data):
+        if current_app.extensions['security'].datastore.find_user(email=field.data):
             raise ValidationError(self.message)
 
 

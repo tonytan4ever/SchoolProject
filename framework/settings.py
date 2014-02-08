@@ -102,7 +102,7 @@ class DefaultConfig(BaseConfig):
     OPENID_FS_STORE_PATH = os.path.join(INSTANCE_FOLDER_PATH, 'openid')
     make_dir(OPENID_FS_STORE_PATH)
     
-    SECURITY_LOGIN_USER_TEMPLATE = 'security/login.html'
+    #SECURITY_LOGIN_USER_TEMPLATE = 'security/login.html'
     SECURITY_USER_IDENTITY_ATTRIBUTES = ['email', 'username']
     SECURITY_PASSWORD_HASH = 'pbkdf2_sha512'
     SECURITY_PASSWORD_SALT = '4f1WQbWEKMPv9S7p'
@@ -110,7 +110,9 @@ class DefaultConfig(BaseConfig):
     SECURITY_REGISTERABLE = True
     SECURITY_CHANGEABLE = True
     SECURITY_CONFIRMABLE = False
-    SECURITY_CHANGE_URL = '/change_password'
+    #SECURITY_CHANGE_URL = '/change_password',
+    #SECURITY_LOGIN_URL =  '/user/login'
+    #SECURITY_LOGOUT_URL =  '/user/logout'
     SECURITY_SEND_PASSWORD_CHANGE_EMAIL = False
     
     SECURITY_SEND_REGISTER_EMAIL = False

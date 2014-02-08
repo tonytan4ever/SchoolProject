@@ -16,14 +16,14 @@
 <div class="page-header">
   <h1>Register</h1>
 </div>
-{% if login_failed %}
-<h3>Register with your {{ provider.name }} account: {{ connection_values['display_name'] }}</h3>
-{% endif %}
 
 <div class="container-fluid">
+	{% if login_failed %}
+		<h3>Register with your {{ provider.name }} account: {{ connection_values['display_name'] }}</h3> <br/>
+	{% endif %}
 	<div class="row">
 	  <div class="well col-xs-4">
-	    {{ render_form(form, action_url="{{ url_for('user.register')}}", action_text="Register",
+	    {{ render_form(form, action_url=url_for('user.register', provider_id=provider.id if provider else None), action_text="Register",
 		                                               btn_class='btn btn-default btn-primary') }}
 	  </div>
 	  {% if not login_failed %}

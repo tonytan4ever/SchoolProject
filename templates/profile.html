@@ -3,12 +3,12 @@
 {% block body_class %}main main-profile{% endblock %}
 
 {% macro show_provider_button(provider_id, display_name, conn, show_update_form=True) %}
-  <div class="span6">
+  <div class="col-xs-4">
     <h2>{{ display_name }}</h2>
     <hr />
     {% if conn %}
       {% if show_update_form %}
-        <form action="{{ url_for('social_post', provider_id=provider_id) }}" method="POST" class="post-update">
+        <form action="{{ url_for('user.social_post', provider_id=provider_id) }}" method="POST" class="post-update">
           <fieldset>
             <div class="control-group">
               <textarea class="input-xlarge" name="message" rows="3">Hello from Flask-Social-Example!</textarea>
@@ -17,8 +17,10 @@
           </fieldset>
         </form>
       {% endif %}
-      <form action="{{ url_for('social.remove_connection', provider_id=conn.provider_id, provider_user_id=conn.provider_user_id) }}?__METHOD_OVERRIDE__=DELETE" method="POST" class="remove-connection">
-        <button type="submit" class="btn btn-danger"><i class="icon-trash icon-white"></i> Remove {{ display_name }} Connection</button>
+      <form action="{{ url_for('social.remove_connection', provider_id=conn.provider_id, provider_user_id=conn.provider_user_id) }}?__METHOD_OVERRIDE__=DELETE" method="POST" role="form" class="remove-connection" style="padding-top: 5px">
+        <div class="form_group ">
+        	<button type="submit" class="btn btn-danger"><i class="icon-trash icon-white"></i> Remove {{ display_name }} Connection</button>
+      	</div>
       </form>
     {% else %}
       <form action="{{ url_for('social.connect', provider_id=provider_id) }}" method="POST" class="create-connection">

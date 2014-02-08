@@ -12,10 +12,10 @@
     
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li class="{% if 'Home' == active_nav_band %}active{% endif %}"><a href="{{ url_for('user.index') }}">Home</a></li>
+        <li class="{% if 'Home' == active_nav_band %}active{% endif %}"><a href="{{ url_for('index') }}">Home</a></li>
         {%- if current_user.is_authenticated() -%}
         <li class="{% if 'Profile' == active_nav_band %}active{% endif %}"><a href="{{ url_for('user.profile') }}">Profile</a></li>
-        <li ><a href="{{ url_for('security.logout') }}">Log out</a></li>
+        <li ><a href="{{ url_for('user.logout') }}">Log out</a></li>
         {%- else -%}
         <li class="{% if 'Login' == active_nav_band %}active{% endif %}"><a href="{{ url_for('user.login') }}">Log in</a></li>
         <li class="{% if 'Register' == active_nav_band %}active{% endif %}"><a href="{{ url_for('user.register') }}">Register</a></li>

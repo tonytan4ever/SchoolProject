@@ -8,6 +8,7 @@
   <form action="{{ url_for('social.login', provider_id=provider_id) }}" method="POST">
     <div class="form_group ">
     	<button type="submit" class="form-control btn btn-primary btn-large">Login with {{ display_name }}</button>
+    	<input type="hidden" name="login_attempt" value="1">
     </div>
   </form>
 {% endmacro %}
@@ -20,7 +21,7 @@
 <div class="container-fluid">
 	<div class="row">
 	  <div class="well col-xs-4"> 
-	    {{ render_form(form, action_url="{{ url_for('user.login')}}", action_text="Login",
+	    {{ render_form(form, action_url=url_for('user.login'), action_text="Login",
 	                                               btn_class='btn btn-default btn-primary') }}
 	  </div>
 	  <div class="col-xs-1">

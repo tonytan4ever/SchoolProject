@@ -14,7 +14,7 @@ from flask import Blueprint, current_app, redirect, request, session, \
      after_this_request, abort, url_for
 from flask.ext.security import current_user, login_required
 from flask.ext.security.utils import get_post_login_redirect, login_user, \
-     get_url, do_flash
+     do_flash, get_url
 from flask.ext.security.decorators import anonymous_user_required
 from werkzeug.local import LocalProxy
 
@@ -43,9 +43,9 @@ def _commit(response=None):
 def login(provider_id): 
     """Starts the provider login OAuth flow"""
     provider = get_provider_or_404(provider_id)
-    print "here I called!"
     callback_url = get_authorize_callback('login', provider_id)
     post_login = request.form.get('next', get_post_login_redirect())
+    session['login_attempt'] = int(request.form.get('login_attempt', 0))
     session['post_oauth_login_url'] = post_login
     return provider.authorize(callback_url)
 
@@ -177,10 +177,11 @@ def login_handler(response, provider, query):
     login_failed.send(current_app._get_current_object(),
                       provider=provider,
                       oauth_response=response)
-
-    next = get_url(_security.login_manager.login_view)
+    #_security.login_manager.login_view = "user.register"
+    #next = get_url(_security.login_manager.login_view)
+    next = url_for('user.register', provider_id=provider.id, login_failed=1)
     msg = '%s account not associated with an existing user' % provider.name
-    do_flash(msg, 'error')
+    do_flash(msg, 'danger' if session['login_attempt'] else 'info')
     return redirect(next)
 
 

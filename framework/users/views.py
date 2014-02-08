@@ -1,21 +1,24 @@
-from flask import Blueprint, render_template,request
+from flask import Blueprint, current_app, render_template,request, flash,\
+           session, redirect, url_for
 
 from flask.ext.security import LoginForm, current_user, login_required, \
-    login_user
-    
+    login_user, logout_user
+
+from social.utils import config_value, get_provider_or_404
+from social.views import connect_handler
 from forms import RegisterForm
+
+from ..core import security
 
 from ..decorators import route
 from .models import User
 
-bp = Blueprint('user', __name__)
+bp = Blueprint('user', __name__, url_prefix="/user")
 
 
-@route(bp, '/')
+@bp.route('/')
 def index():
-    return render_template('index.html', 
-                           active_nav_band = "Home",
-                           total_users=User.query.count())
+    return redirect('/')
 
 
 @bp.route('/login')
@@ -26,6 +29,16 @@ def login():
     return render_template('security/login.html', 
                                 active_nav_band = "Login",
                                 form=LoginForm())
+    
+@route(bp, '/logout')
+def logout():
+    """View function which handles a logout request."""
+
+    if current_user.is_authenticated():
+        logout_user()
+
+    return redirect(request.args.get('next', None) or
+                                url_for('user.index'))
 
 
 @bp.route('/register', methods=['GET', 'POST'])
@@ -44,7 +57,7 @@ def register(provider_id=None):
         connection_values = None
 
     if form.validate_on_submit():
-        ds = current_app.security.datastore
+        ds = current_app.extensions['security'].datastore
         user = ds.create_user(email=form.email.data, password=form.password.data)
         ds.commit()
 
@@ -59,7 +72,7 @@ def register(provider_id=None):
         if login_user(user):
             ds.commit()
             flash('Account created successfully', 'info')
-            return redirect(url_for('profile'))
+            return redirect(url_for('user.profile'))
 
         return render_template('thanks.html', user=user)
 
@@ -76,9 +89,11 @@ def register(provider_id=None):
 @route(bp, '/profile')
 def profile():
     return render_template('profile.html',
-        twitter_conn=current_app.social.twitter.get_connection(),
-        facebook_conn=current_app.social.facebook.get_connection(),
-        github_conn=current_app.social.github.get_connection())
+        twitter_conn=current_app.extensions['social'].twitter.get_connection(),
+        facebook_conn=current_app.extensions['social'].facebook.get_connection(),
+        #github_conn=current_app.extensions['social'].github.get_connection()
+        )
+
 
 
 @route(bp, '/profile/<provider_id>/post', methods=['POST'])
@@ -98,7 +113,7 @@ def social_post(provider_id):
 
         flash('Message posted to %s: %s' % (display_name, message), 'info')
 
-    return redirect(url_for('profile'))
+    return redirect(url_for('userprofile'))
 
 
 @route(bp, '/admin')
