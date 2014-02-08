@@ -10,13 +10,13 @@ js_main = Bundle("js/src/main.js",
                  filters="jsmin",
                  output="js/main.js")
 
-css_less = Bundle("css/src/styles.less",
-                  filters="less",
-                  output="css/styles.css",
-                  debug=False)
+#css_less = Bundle("css/src/styles.less",
+#                  filters="less",
+#                  output="css/styles.css",
+#                  )
 
 css_main = Bundle(Bundle("css/bootstrap.min.css"),
-                  css_less,
+                  "css/src/styles.css",
                   filters="cssmin",
                   output="css/main.css")
 

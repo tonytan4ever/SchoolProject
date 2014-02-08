@@ -3,7 +3,7 @@ import factory
 from settings import DefaultConfig
 
 
-def create_app(settings_override=None, register_security_blueprint=True):
+def create_app(settings_override=None, register_security_blueprint=False):
     """Returns the Overholt API application instance"""
 
     app = factory.create_app(DefaultConfig.PROJECT_NAME, 

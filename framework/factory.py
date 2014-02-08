@@ -17,7 +17,8 @@ from .helpers import register_blueprints
 from .middleware import HTTPMethodOverrideMiddleware
 from .models import User, Role
 
-from settings import DefaultConfig, INSTALLED_APPS 
+from settings import DefaultConfig, INSTALLED_APPS
+ 
 
 
 def create_app(package_name, package_path, settings_override=None,

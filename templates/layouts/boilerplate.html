@@ -27,15 +27,21 @@
 </head>
 <body class="{% block body_class %}{% endblock %}">
   <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
-  <div class="container">
-    {% include "_nav.html" %}
-    {% include "_messages.html" -%}
-    {% block layout %}{% endblock -%}
-    <footer class="footer">
-      <p>Copyright &copy; 2012 by Matt Wright</p>
-      <p>This site uses <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap</a>. You can also <a href="http://www.github.com/mattupstate/flask-social-example">view the source code.</a></p>
-    </footer>
+  <div id="wrap">
+	  
+	    {% include "_nav.html" %}
+	 <div class="container">
+	    {% include "_messages.html" -%}
+	    {% block layout %}{% endblock -%}
+	 </div>
   </div>
+  
+  <footer id="footer" class="footer">
+      <div class="container">
+      	<p class="text-muted">Copyright &copy; 2014 by Tony Tan &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+      	This site uses <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap</a>. You can also <a href="https://github.com/tonytan4ever/SchoolProject">view the source code.</a></p>
+   	  </div>
+   </footer>
   {% assets "js_libs" %}
   <script type="text/javascript" src="{{ ASSET_URL }}"></script>
   {% endassets %}

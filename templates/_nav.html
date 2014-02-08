@@ -1,21 +1,30 @@
-<div class="navbar">
-  <div class="navbar-inner">
-    <div class="container">
-      <a class="brand" href="/">Flask-Social Example</a>
-      <ul class="nav">
-        <li><a href="{{ url_for('user.index') }}">Home</a></li>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Social Site Example: After School Heaven</a>
+    </div>
+    
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="{% if 'Home' == active_nav_band %}active{% endif %}"><a href="{{ url_for('user.index') }}">Home</a></li>
         {%- if current_user.is_authenticated() -%}
-        <li><a href="{{ url_for('user.profile') }}">Profile</a></li>
-        <li><a href="{{ url_for('security.logout') }}">Log out</a></li>
+        <li class="{% if 'Profile' == active_nav_band %}active{% endif %}"><a href="{{ url_for('user.profile') }}">Profile</a></li>
+        <li ><a href="{{ url_for('security.logout') }}">Log out</a></li>
         {%- else -%}
-        <li><a href="{{ url_for('security.login') }}">Log in</a></li>
-        <li><a href="{{ url_for('user.register') }}">Register</a></li>
+        <li class="{% if 'Login' == active_nav_band %}active{% endif %}"><a href="{{ url_for('user.login') }}">Log in</a></li>
+        <li class="{% if 'Register' == active_nav_band %}active{% endif %}"><a href="{{ url_for('user.register') }}">Register</a></li>
         {%- endif -%}
       </ul>
-      <ul class="nav pull-right github">
+      <ul class="nav navbar-nav navbar-right github">
         <li><iframe src="http://ghbtns.com/github-btn.html?user=tonytan4ever&type=follow"
   allowtransparency="true" frameborder="0" scrolling="0" width="143px" height="20px"></iframe></li>
       </ul>
     </div>
   </div>
-</div>
+</nav>

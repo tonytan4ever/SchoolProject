@@ -1,4 +1,9 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template,request
+
+from flask.ext.security import LoginForm, current_user, login_required, \
+    login_user
+    
+from forms import RegisterForm
 
 from ..decorators import route
 from .models import User
@@ -8,7 +13,19 @@ bp = Blueprint('user', __name__)
 
 @route(bp, '/')
 def index():
-    return render_template('index.html', total_users=User.query.count())
+    return render_template('index.html', 
+                           active_nav_band = "Home",
+                           total_users=User.query.count())
+
+
+@bp.route('/login')
+def login():
+    if current_user.is_authenticated():
+        return redirect(request.referrer or '/')
+
+    return render_template('security/login.html', 
+                                active_nav_band = "Login",
+                                form=LoginForm())
 
 
 @bp.route('/register', methods=['GET', 'POST'])
@@ -48,7 +65,8 @@ def register(provider_id=None):
 
     login_failed = int(request.args.get('login_failed', 0))
 
-    return render_template('register.html',
+    return render_template('security/register.html',
+                           active_nav_band = "Register",
                            form=form,
                            provider=provider,
                            login_failed=login_failed,

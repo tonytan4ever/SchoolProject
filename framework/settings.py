@@ -7,10 +7,11 @@ PROJECT_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 # Instance folder path, make it independent.
 INSTANCE_FOLDER_PATH = PROJECT_ROOT
 
-INSTALLED_APPS = [
+INSTALLED_APPS = (
   'framework.api',
-  'framework.users',  
-]
+  'framework.users',
+  'social',  
+)
 
 def make_dir(dir_path):
     try:
@@ -82,7 +83,7 @@ class DefaultConfig(BaseConfig):
     OPENID_FS_STORE_PATH = os.path.join(INSTANCE_FOLDER_PATH, 'openid')
     make_dir(OPENID_FS_STORE_PATH)
     
-    SECURITY_LOGIN_USER_TEMPLATE = 'security/login_user.html'
+    SECURITY_LOGIN_USER_TEMPLATE = 'security/login.html'
     SECURITY_USER_IDENTITY_ATTRIBUTES = ['email', 'username']
     SECURITY_PASSWORD_HASH = 'pbkdf2_sha512'
     SECURITY_PASSWORD_SALT = '4f1WQbWEKMPv9S7p'

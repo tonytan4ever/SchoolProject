@@ -17,3 +17,11 @@ from .datastore import SQLAlchemyConnectionDatastore, \
      MongoEngineConnectionDatastore, PeeweeConnectionDatastore
 from .signals import connection_created, connection_failed, login_failed, \
      connection_removed, login_completed
+from views import create_blueprint
+
+class fake_state:
+    def __init__(self, blueprint_name):
+        self.blueprint_name = blueprint_name
+        self.url_prefix ="/"
+        
+bp = create_blueprint(fake_state('social'), __name__)
