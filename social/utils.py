@@ -17,7 +17,6 @@ from flask import current_app, url_for, request, abort
 
 def get_provider_or_404(provider_id):
     try:
-        print current_app.extensions
         return current_app.extensions['social'].providers[provider_id]
     except KeyError:
         abort(404)

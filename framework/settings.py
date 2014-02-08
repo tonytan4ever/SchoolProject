@@ -9,7 +9,7 @@ INSTANCE_FOLDER_PATH = PROJECT_ROOT
 
 INSTALLED_APPS = (
   'framework.api',
-  'social',  
+  #'social',  
   'framework.users',
 )
 
@@ -48,15 +48,16 @@ class BaseConfig(object):
     make_dir(UPLOAD_FOLDER)
     
     SOCIAL_TWITTER = dict(
-          consumer_key='key',
-          consumer_secret='secret'
+          consumer_key='s9I90X4WxYbZvL7wPF4Fg',
+          consumer_secret='Tz9o8aI1VBBklqbOsdKVE2ze1aPphzQ4gES7YeLY6A'
     )
 
     SOCIAL_FACEBOOK = dict(
-        consumer_key='key',
-        consumer_secret='secret',
-        request_token_params=None,
-        scope='email,publish_stream'
+        consumer_key='527132627401839',
+        consumer_secret='21174e6e7c44880e7eb360ce52888ca6',
+        request_token_params=dict(
+                scope='email,publish_stream'
+        )
     )
 
     #SOCIAL_GITHUB = dict(

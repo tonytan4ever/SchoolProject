@@ -15,8 +15,9 @@ from flask_security import SQLAlchemyUserDatastore
 from .core import db, mail, security, social, assets_env
 from .helpers import register_blueprints
 from .middleware import HTTPMethodOverrideMiddleware
-from .models import User, Role
+from .models import User, Role, Connection
 
+from social import SQLAlchemyConnectionDatastore
 from settings import DefaultConfig, INSTALLED_APPS
  
 
@@ -41,9 +42,11 @@ def create_app(package_name, package_path, settings_override=None,
 
     db.init_app(app)
     mail.init_app(app)
-    security.init_app(app, SQLAlchemyUserDatastore(db, User, Role),
+    security_ds = SQLAlchemyUserDatastore(db, User, Role)
+    security.init_app(app, security_ds,
                       register_blueprint=register_security_blueprint)
-    social.init_app(app)
+    social_ds = SQLAlchemyConnectionDatastore(db, Connection)
+    social.init_app(app, social_ds)
     assets_env.init_app(app)
 
     register_blueprints(app, INSTALLED_APPS)

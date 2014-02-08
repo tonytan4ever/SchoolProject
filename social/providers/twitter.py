@@ -17,7 +17,7 @@ config = {
     'id': 'twitter',
     'name': 'Twitter',
     'install': 'pip install python-twitter',
-    'module': 'social_framework.providers.twitter',
+    'module': 'social.providers.twitter',
     'base_url': 'http://api.twitter.com/1/',
     'request_token_url': 'https://api.twitter.com/oauth/request_token',
     'access_token_url': 'https://api.twitter.com/oauth/access_token',
