@@ -124,8 +124,10 @@ class Social(object):
                 continue
 
             suffix = key.lower().replace('social_', '')
-            default_module_name = 'app.social_framework.providers.%s' % suffix
+            default_module_name = 'social.providers.%s' % suffix
+            print config
             module_name = config.get('module', default_module_name)
+            print module_name
             module = import_module(module_name)
             config = update_recursive(module.config, config)
 

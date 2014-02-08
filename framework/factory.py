@@ -12,7 +12,7 @@ from celery import Celery
 from flask import Flask
 from flask_security import SQLAlchemyUserDatastore
 
-from .core import db, mail, security, assets_env
+from .core import db, mail, security, social, assets_env
 from .helpers import register_blueprints
 from .middleware import HTTPMethodOverrideMiddleware
 from .models import User, Role
@@ -43,6 +43,7 @@ def create_app(package_name, package_path, settings_override=None,
     mail.init_app(app)
     security.init_app(app, SQLAlchemyUserDatastore(db, User, Role),
                       register_blueprint=register_security_blueprint)
+    social.init_app(app)
     assets_env.init_app(app)
 
     register_blueprints(app, INSTALLED_APPS)

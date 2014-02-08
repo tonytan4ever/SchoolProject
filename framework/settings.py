@@ -9,8 +9,8 @@ INSTANCE_FOLDER_PATH = PROJECT_ROOT
 
 INSTALLED_APPS = (
   'framework.api',
-  'framework.users',
   'social',  
+  'framework.users',
 )
 
 def make_dir(dir_path):
@@ -46,6 +46,24 @@ class BaseConfig(object):
     MAX_CONTENT_LENGTH = 16 * 1024 * 1024
     UPLOAD_FOLDER = os.path.join(INSTANCE_FOLDER_PATH, 'uploads')
     make_dir(UPLOAD_FOLDER)
+    
+    SOCIAL_TWITTER = dict(
+          consumer_key='key',
+          consumer_secret='secret'
+    )
+
+    SOCIAL_FACEBOOK = dict(
+        consumer_key='key',
+        consumer_secret='secret',
+        request_token_params=None,
+        scope='email,publish_stream'
+    )
+
+    #SOCIAL_GITHUB = dict(
+    #    consumer_key='key',
+    #    consumer_secret='secret',
+    #    #module='app.github'
+    #)
 
 
 class DefaultConfig(BaseConfig):

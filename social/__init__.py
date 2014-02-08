@@ -22,6 +22,6 @@ from views import create_blueprint
 class fake_state:
     def __init__(self, blueprint_name):
         self.blueprint_name = blueprint_name
-        self.url_prefix ="/"
+        self.url_prefix =""
         
 bp = create_blueprint(fake_state('social'), __name__)

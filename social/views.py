@@ -40,9 +40,10 @@ def _commit(response=None):
 
 
 @anonymous_user_required
-def login(provider_id):
+def login(provider_id): 
     """Starts the provider login OAuth flow"""
     provider = get_provider_or_404(provider_id)
+    print "here I called!"
     callback_url = get_authorize_callback('login', provider_id)
     post_login = request.form.get('next', get_post_login_redirect())
     session['post_oauth_login_url'] = post_login

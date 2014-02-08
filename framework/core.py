@@ -12,6 +12,8 @@ from flask_security import Security
 from flask_assets import Environment
 from webassets.loaders import PythonLoader as PythonAssetsLoader
 
+from social import Social
+
 #: Flask-SQLAlchemy extension instance
 db = SQLAlchemy()
 
@@ -20,6 +22,9 @@ mail = Mail()
 
 #: Flask-Security extension instance
 security = Security()
+
+#: My Flask-Social extension instance
+social = Social()
 
 
 import assets
