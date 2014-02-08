@@ -1,0 +1,16 @@
+<uwsgi id="audit_star">
+    <socket>/tmp/audit_star.sock</socket>
+    <master/>
+    <chdir>/srv/auditstar_webapp</chdir>
+    <module>wsgi</module>
+    <pidfile>/tmp/audit_star.pid</pidfile>
+    <daemonize>/var/log/uwsgi/audit_star.log</daemonize>
+    <processes>4</processes>
+    <harakiri>60</harakiri>
+    <reload-mercy>8</reload-mercy>
+    <cpu-affinity>1</cpu-affinity>
+    <stats>/tmp/stats.socket</stats>
+    <uid>uwsgi</uid>
+    <gid>www-data</gid>
+    <vacuum/>
+</uwsgi>
