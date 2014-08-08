@@ -9,8 +9,8 @@ oauth = OAuth(app)
 
 douban = oauth.remote_app(
     'douban',
-    consumer_key='042483bce5e3968a0c6d8b36b1aac39e',
-    consumer_secret='739e38e2a3bd346b',
+    consumer_key='<consumer_key>',
+    consumer_secret='<consumer_secret>',
     base_url='https://api.douban.com/v2/',
     request_token_url=None,
     request_token_params={'scope': 'douban_basic_common'},
