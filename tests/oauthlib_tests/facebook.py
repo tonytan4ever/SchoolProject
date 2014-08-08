@@ -3,8 +3,8 @@ from flask import Flask, redirect, url_for, session, request
 from flask_oauthlib.client import OAuth
 
 
-FACEBOOK_APP_ID = '527132627401839'
-FACEBOOK_APP_SECRET = '21174e6e7c44880e7eb360ce52888ca6'
+FACEBOOK_APP_ID = '<MY_FACEBOOK_ID>'
+FACEBOOK_APP_SECRET = '<MY_FACEBOOK_SECRET>'
 
 
 app = Flask(__name__)
